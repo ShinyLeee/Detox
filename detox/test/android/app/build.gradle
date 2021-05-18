@@ -111,6 +111,8 @@ dependencies {
 
     implementation project(':react-native-webview')
 
+    implementation project(':@react-native-community_geolocation')
+
     androidTestImplementation(project(path: ':detox'))
     androidTestImplementation 'com.linkedin.testbutler:test-butler-library:2.2.1'
     androidTestUtil 'com.linkedin.testbutler:test-butler-app:2.2.1'
