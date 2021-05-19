@@ -14,6 +14,7 @@ const RecipeQuerying = require('./helpers/GenyRecipeQuerying');
 const DetoxRuntimeError = require('../../../../errors/DetoxRuntimeError');
 const logger = require('../../../../utils/logger').child({ __filename });
 const environment = require('../../../../utils/environment');
+const DetoxGenymotionManager = require('../../../../android/espressoapi/DetoxGenymotionManager');
 
 const MIN_GMSAAS_VERSION = '1.6.0';
 const cleanupLogData = {
@@ -84,8 +85,8 @@ class GenyCloudDriver extends AndroidDriver {
     await this._instanceLauncher.shutdown(instance);
   }
 
-  async setLocation({ adbName }, lat, lon) {
-    await this.adb.setLocation(adbName, lat, lon);
+  async setLocation(instance, lat, lon) {
+    await this.invocationManager.execute(DetoxGenymotionManager.setLocation(parseFloat(lat), parseFloat(lon)));
   }
 
   _assertRecipe(deviceQuery, recipe) {
