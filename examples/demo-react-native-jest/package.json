@@ -3,6 +3,7 @@
   "version": "18.13.0",
   "private": true,
   "scripts": {
+    "test:ios": "detox test --configuration ios.sim.debug -l verbose",
     "test:ios-release": "detox test --configuration ios.sim.release -l verbose",
     "test:ios-release-ci": "detox test --configuration ios.sim.release -l verbose --workers 2",
     "test:android-release": "detox test --configuration android.emu.release",

@@ -1,13 +1,18 @@
 module.exports = {
   "testRunner": "jest",
-  "runnerConfig": process.env.DETOX_EXPOSE_GLOBALS === '0' ? 'e2eExplicitRequire/config.json' : 'e2e/config.json',
-  "specs": process.env.DETOX_EXPOSE_GLOBALS === '0' ? 'e2eExplicitRequire' : 'e2e',
+  "runnerConfig": 'e2eExplicitRequire/config.json',
+  "specs": 'e2eExplicitRequire',
   "behavior": {
     "init": {
-      "exposeGlobals": process.env.DETOX_EXPOSE_GLOBALS === '0' ? false : true,
+      "exposeGlobals": false,
     },
   },
   "apps": {
+    "ios.debug": {
+      "type": "ios.app",
+      "binaryPath": "../demo-react-native/ios/build/Build/Products/Debug-iphonesimulator/example.app",
+      "build": "xcodebuild -project ios/example.xcodeproj -UseNewBuildSystem=NO -scheme example -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build"
+    },
     "ios.release": {
       "type": "ios.app",
       "binaryPath": "../demo-react-native/ios/build/Build/Products/Release-iphonesimulator/example.app",
@@ -32,6 +37,10 @@ module.exports = {
     }
   },
   "configurations": {
+    "ios.sim.debug": {
+      "device": "simulator",
+      "app": "ios.debug"
+    },
     "ios.sim.release": {
       "device": "simulator",
       "app": "ios.release",
